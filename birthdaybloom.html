@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Birthday Bloom - A Magical Garden of Wishes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600;700&family=Quicksand:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Quicksand', sans-serif;
+            background: linear-gradient(to bottom right, #FFF0F5, #FFB6C1);
+            min-height: 100vh;
+            overflow-x: hidden;
+            color: #444;
+        }
+
+        /* Floating petals animation */
+        .floating-petals {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            opacity: 0.7;
+            animation: float 8s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(-100vh) rotate(0deg);
+                opacity: 0.7;
+            }
+            100% {
+                transform: translateY(100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Landing Section */
+        .landing-section {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .main-flower {
+            width: 200px;
+            height: 200px;
+            margin-bottom: 30px;
+            animation: bloom 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes bloom {
+            0% { transform: scale(1) rotate(0deg); }
+            100% { transform: scale(1.1) rotate(5deg); }
+        }
+
+        .greeting-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #AA336A;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(255, 182, 193, 0.5);
+            animation: fadeInUp 2s ease-out;
+        }
+
+        .greeting-subtitle {
+            font-size: 1.4rem;
+            color: #666;
+            margin-bottom: 40px;
+            animation: fadeInUp 2s ease-out 0.5s both;
+        }
+
+        .bloom-button {
+            padding: 18px 40px;
+            font-family: 'Quicksand', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 600;
+            background: linear-gradient(45deg, #FFB6C1, #E6E6FA);
+            color: #AA336A;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 8px 25px rgba(255, 182, 193, 0.4);
+            transition: all 0.3s ease;
+            animation: fadeInUp 2s ease-out 1s both;
+        }
+
+        .bloom-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(255, 182, 193, 0.6);
+            background: linear-gradient(45deg, #E6E6FA, #FFB6C1);
+        }
+
+        /* Garden Path Sections */
+        .garden-section {
+            min-height: 100vh;
+            padding: 80px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .section-divider {
+            height: 100px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z' fill='%23C1E1C1'/%3E%3C/svg%3E") no-repeat center;
+            background-size: cover;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: #AA336A;
+            text-align: center;
+            margin-bottom: 60px;
+            text-shadow: 1px 1px 3px rgba(255, 182, 193, 0.3);
+        }
+
+        /* Memory Cards */
+        .memory-garden {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .memory-card {
+            background: linear-gradient(135deg, #FFFACD, #FFF0F5);
+            padding: 30px;
+            border-radius: 25px;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.2);
+            border: 3px solid #C1E1C1;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .memory-card::before {
+            content: '🌸';
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 3rem;
+            opacity: 0.3;
+            transform: rotate(15deg);
+        }
+
+        .memory-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(255, 182, 193, 0.3);
+        }
+
+        .memory-year {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: #AA336A;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .memory-text {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #555;
+        }
+
+        /* Little Blessings */
+        .blessings-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin: 60px 0;
+        }
+
+        .blessing-petal {
+            background: linear-gradient(135deg, #E6E6FA, #C1E1C1);
+            padding: 20px 30px;
+            border-radius: 50px;
+            color: #AA336A;
+            font-weight: 500;
+            font-size: 1.1rem;
+            box-shadow: 0 5px 15px rgba(230, 230, 250, 0.4);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            animation: gentleBob 3s ease-in-out infinite;
+        }
+
+        .blessing-petal:nth-child(even) {
+            animation-delay: 1.5s;
+        }
+
+        .blessing-petal:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 25px rgba(230, 230, 250, 0.6);
+        }
+
+        @keyframes gentleBob {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        /* Wish Petal Centerpiece */
+        .wish-section {
+            background: linear-gradient(to top, #E6E6FA, #FFFACD);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .wish-flower {
+            width: 300px;
+            height: 300px;
+            margin: 0 auto 40px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+        }
+
+        .wish-flower:hover {
+            transform: scale(1.1);
+        }
+
+        .wish-message {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px;
+            background: rgba(255, 255, 255, 0.8);
+            border-radius: 30px;
+            box-shadow: 0 15px 35px rgba(255, 182, 193, 0.3);
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: #AA336A;
+            font-style: italic;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s ease;
+        }
+
+        .wish-message.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Gift Section */
+        .gift-section {
+            background: linear-gradient(135deg, #FFF0F5, #C1E1C1);
+            padding: 100px 20px;
+            text-align: center;
+        }
+
+        .gift-box {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 40px;
+            background: linear-gradient(45deg, #FFB6C1, #E6E6FA);
+            border-radius: 20px;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            box-shadow: 0 10px 30px rgba(255, 182, 193, 0.4);
+        }
+
+        .gift-box::before {
+            content: '🎁';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 4rem;
+        }
+
+        .gift-box:hover {
+            transform: rotateY(180deg);
+        }
+
+        .gift-content {
+            max-width: 500px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(255, 182, 193, 0.3);
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.6s ease;
+        }
+
+        .gift-content.opened {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        /* Final Section */
+        .farewell-section {
+            background: linear-gradient(to bottom, #E6E6FA, #FFB6C1);
+            padding: 100px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .farewell-message {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2.5rem;
+            color: #AA336A;
+            margin-bottom: 40px;
+            text-shadow: 1px 1px 3px rgba(255, 182, 193, 0.5);
+        }
+
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .star {
+            position: absolute;
+            color: #FFFACD;
+            font-size: 1.5rem;
+            animation: twinkle 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.3; transform: scale(1); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .greeting-title {
+                font-size: 3rem;
+            }
+            .section-title {
+                font-size: 2.5rem;
+            }
+            .memory-garden {
+                grid-template-columns: 1fr;
+            }
+            .wish-flower {
+                width: 200px;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Floating Petals Background -->
+    <div class="floating-petals" id="petalsContainer"></div>
+
+    <!-- Landing Section -->
+    <section class="landing-section">
+        <div class="main-flower">
+            <svg viewBox="0 0 200 200" width="200" height="200">
+                <g transform="translate(100,100)">
+                    <!-- Petals -->
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#FFB6C1" transform="rotate(0)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#E6E6FA" transform="rotate(45)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#FFFACD" transform="rotate(90)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#C1E1C1" transform="rotate(135)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#FFB6C1" transform="rotate(180)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#E6E6FA" transform="rotate(225)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#FFFACD" transform="rotate(270)" opacity="0.8"/>
+                    <ellipse cx="0" cy="-60" rx="20" ry="40" fill="#C1E1C1" transform="rotate(315)" opacity="0.8"/>
+                    <!-- Center -->
+                    <circle cx="0" cy="0" r="25" fill="#FFFACD"/>
+                    <circle cx="0" cy="0" r="15" fill="#AA336A"/>
+                </g>
+            </svg>
+        </div>
+        <h1 class="greeting-title">Hello, SUBH! 🌸</h1>
+        <p class="greeting-subtitle">Welcome to your magical birthday garden</p>
+        <button class="bloom-button" onclick="startBloom()">Start Your Birthday Bloom 🌸</button>
+    </section>
+
+    <!-- Garden Path Section 1: Memory Garden -->
+    <div class="section-divider"></div>
+    <section class="garden-section" id="memorySection">
+        <div class="container">
+            <h2 class="section-title">🌿 Your Bloom Through the Years</h2>
+            <div class="memory-garden">
+                <div class="memory-card">
+                    <div class="memory-year">2020 - Seeds of Strength</div>
+                    <p class="memory-text">Like a resilient flower pushing through concrete, you showed incredible strength this year. Every challenge became soil for your growth. 🌱</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-year">2021 - Budding Dreams</div>
+                    <p class="memory-text">Your dreams began to take shape, like tiny buds preparing to bloom. You nurtured your hopes with such tender care. 🌿</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-year">2022 - Full Blossom</div>
+                    <p class="memory-text">This was your year of beautiful blooming! You shared your light with the world and made everything around you more beautiful. 🌺</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-year">2023 - Garden of Joy</div>
+                    <p class="memory-text">You created a garden of happiness wherever you went. Your kindness was like sunshine, helping others bloom too. ☀️</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-year">2024 - New Seasons</div>
+                    <p class="memory-text">And now, a brand new season begins! May this birthday year bring you the most beautiful blooms yet. Happy Birthday! 🎂</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garden Path Section 2: Little Blessings -->
+    <section class="garden-section">
+        <div class="container">
+            <h2 class="section-title">🧚 Little Blessings</h2>
+            <div class="blessings-container">
+                <div class="blessing-petal">You are magical 💫</div>
+                <div class="blessing-petal">Your smile brightens skies ☀️</div>
+                <div class="blessing-petal">You bring joy everywhere 🌈</div>
+                <div class="blessing-petal">Your heart is pure gold 💛</div>
+                <div class="blessing-petal">You make dreams come true ✨</div>
+                <div class="blessing-petal">You are deeply loved 💖</div>
+                <div class="blessing-petal">Your spirit is beautiful 🦋</div>
+                <div class="blessing-petal">You inspire others daily 🌟</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wish Petal Centerpiece -->
+    <section class="wish-section">
+        <h2 class="section-title">💌 The Wish Petal</h2>
+        <div class="wish-flower" onclick="revealWish()">
+            <svg viewBox="0 0 300 300" width="300" height="300">
+                <g transform="translate(150,150)">
+                    <!-- Large magical flower -->
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFB6C1" transform="rotate(0)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#E6E6FA" transform="rotate(30)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFFACD" transform="rotate(60)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#C1E1C1" transform="rotate(90)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFB6C1" transform="rotate(120)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#E6E6FA" transform="rotate(150)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFFACD" transform="rotate(180)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#C1E1C1" transform="rotate(210)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFB6C1" transform="rotate(240)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#E6E6FA" transform="rotate(270)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#FFFACD" transform="rotate(300)" opacity="0.9"/>
+                    <ellipse cx="0" cy="-80" rx="30" ry="60" fill="#C1E1C1" transform="rotate(330)" opacity="0.9"/>
+                    <!-- Glowing center -->
+                    <circle cx="0" cy="0" r="35" fill="#FFFACD" opacity="0.8"/>
+                    <circle cx="0" cy="0" r="25" fill="#AA336A" opacity="0.6"/>
+                    <text x="0" y="8" text-anchor="middle" fill="white" font-size="16" font-family="Dancing Script">Click me</text>
+                </g>
+            </svg>
+        </div>
+        <div class="wish-message" id="wishMessage">
+            "Wishing you a birthday full of softness, sparkles, and everything kind. May your heart always bloom with joy, your dreams take flight like butterflies, and your days be painted in the most beautiful colors. You deserve all the magic this world has to offer. 💖✨"
+        </div>
+    </section>
+
+    <!-- Gift Section -->
+    <section class="gift-section">
+        <h2 class="section-title">🎁 A Special Gift</h2>
+        <div class="gift-box" onclick="openGift()"></div>
+        <div class="gift-content" id="giftContent">
+            <h3 style="font-family: 'Dancing Script', cursive; font-size: 2rem; color: #AA336A; margin-bottom: 20px;">
+                A Digital Hug Just for You 🤗
+            </h3>
+            <p style="font-size: 1.2rem; line-height: 1.6; color: #555;">
+                Here's a warm, cozy hug wrapped in pixels and love! 
+                <br><br>
+                *Imagine the softest, warmest embrace*
+                <br><br>
+                You are cherished, you are wonderful, and you make the world a brighter place just by being in it. 
+                <br><br>
+                Happy Birthday, beautiful soul! 🌸💕
+            </p>
+        </div>
+    </section>
+
+    <!-- Final Farewell Section -->
+    <section class="farewell-section">
+        <div class="stars-container" id="starsContainer"></div>
+        <p class="farewell-message">
+            This was made with petals, pixels, and all my love 🌷
+        </p>
+        <p style="font-size: 1.2rem; color: #666; margin-top: 20px;">
+            May your birthday be as magical as you are ✨
+        </p>
+    </section>
+
+    <script>
+        // Create floating petals
+        function createFloatingPetals() {
+            const container = document.getElementById('petalsContainer');
+            const petals = ['🌸', '🌺', '🌼', '🌻', '🌷', '💮', '🏵️'];
+            
+            setInterval(() => {
+                const petal = document.createElement('div');
+                petal.className = 'petal';
+                petal.textContent = petals[Math.floor(Math.random() * petals.length)];
+                petal.style.left = Math.random() * 100 + '%';
+                petal.style.animationDuration = (Math.random() * 3 + 5) + 's';
+                petal.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(petal);
+                
+                setTimeout(() => {
+                    petal.remove();
+                }, 8000);
+            }, 1000);
+        }
+
+        // Start bloom animation
+        function startBloom() {
+            document.getElementById('memorySection').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+            
+            // Add sparkle effect
+            createSparkles();
+        }
+
+        // Reveal wish message
+        function revealWish() {
+            const wishMessage = document.getElementById('wishMessage');
+            wishMessage.classList.add('revealed');
+            createSparkles();
+        }
+
+        // Open gift
+        function openGift() {
+            const giftContent = document.getElementById('giftContent');
+            giftContent.classList.add('opened');
+            createSparkles();
+        }
+
+        // Create sparkle effects
+        function createSparkles() {
+            const sparkles = ['✨', '💫', '⭐', '🌟', '💖', '💕'];
+            
+            for (let i = 0; i < 20; i++) {
+                const sparkle = document.createElement('div');
+                sparkle.textContent = sparkles[Math.floor(Math.random() * sparkles.length)];
+                sparkle.style.position = 'fixed';
+                sparkle.style.left = Math.random() * 100 + '%';
+                sparkle.style.top = Math.random() * 100 + '%';
+                sparkle.style.fontSize = (Math.random() * 20 + 15) + 'px';
+                sparkle.style.pointerEvents = 'none';
+                sparkle.style.zIndex = '1000';
+                sparkle.style.animation = 'sparkleEffect 2s ease-out forwards';
+                document.body.appendChild(sparkle);
+                
+                setTimeout(() => {
+                    sparkle.remove();
+                }, 2000);
+            }
+        }
+
+        // Create floating stars
+        function createStars() {
+            const container = document.getElementById('starsContainer');
+            const stars = ['⭐', '✨', '🌟', '💫'];
+            
+            for (let i = 0; i < 15; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.textContent = stars[Math.floor(Math.random() * stars.length)];
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 2 + 's';
+                container.appendChild(star);
+            }
+        }
+
+        // Add sparkle animation CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes sparkleEffect {
+                0% { 
+                    opacity: 0; 
+                    transform: scale(0) rotate(0deg); 
+                }
+                50% { 
+                    opacity: 1; 
+                    transform: scale(1.2) rotate(180deg); 
+                }
+                100% { 
+                    opacity: 0; 
+                    transform: scale(0) rotate(360deg); 
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Initialize
+        window.addEventListener('load', () => {
+            createFloatingPetals();
+            createStars();
+        });
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'96b5647176ac47c7',t:'MTc1NDU1NTIyMS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
